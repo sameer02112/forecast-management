@@ -1,0 +1,11 @@
+.detail-page-container{
+    display: flex;
+}
+.sidebar-container{
+    display: flex;
+    width: 20%;
+    height: 100vh;
+    background-color: #12272f;
+    box-shadow: 5px 10px #888888;
+    padding: 10px;
+}

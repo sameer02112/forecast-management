@@ -1,0 +1,28 @@
+.app-navbar{
+    height: 60px;
+    position: sticky;
+    z-index: 1;
+    background-color: #0c1418;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+.app-navbar *{
+    padding: 4px;
+}
+.app-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 10px;
+    padding: 5px;
+}
+.app-controls{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
