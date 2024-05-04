@@ -7,7 +7,7 @@
 
 .landing-page-container{
     position: relative;
-    top: -45rem;
+    /* top: -45rem; */
     color: white !important;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,8 @@
     
 }
 .landing-page-header{
-    font-size: 30px;
+    font-size: 38px;
+    top: 100px;
 }
 
 .map-container{
@@ -45,7 +46,6 @@
 @media screen and (max-width: 980px) {
     .card-container {
       min-width: 12rem;
-      font-size: 14px;
     }
   }
 .card-forecast-value-container, .card-forecast-percent-container{

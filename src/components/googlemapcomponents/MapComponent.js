@@ -37,11 +37,6 @@ const MapComponent = () => {
   useEffect(() => {
     if (map) {
       const google = window.google;
-      // const markerData = [
-      //   { lat: 19.076090, lng: 72.877426, city: 'Mumbai', data: 'Data for New York' },
-      //   { lat: 34.0522, lng: 118.2437, city: 'Los Angeles', data: 'Data for Los Angeles' },
-      // ];
-
       const markerData = landingPageCardData;
 
       const markerList = markerData.map(marker => {
@@ -79,5 +74,11 @@ const MapComponent = () => {
 
   return <div id="map" className="map-container"></div>;
 };
+
+const CustomMarker = (props) => {
+    return(
+      <div></div>
+    )
+}
 
 export default MapComponent;

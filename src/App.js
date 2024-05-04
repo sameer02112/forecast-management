@@ -1,9 +1,12 @@
+import React, { createContext, useContext, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import DetailPage from './components/DetailPage';
 import { RouterProvider } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
 import { MainContainer, Body } from './components/Body';
+
+export const MyContext = createContext();
 
 const appRouter = createBrowserRouter([{
   path: "/",
@@ -21,13 +24,18 @@ const appRouter = createBrowserRouter([{
 }])
 
 function App() {
+
+  const [widgetPosition, setWidgetPosition] = useState('');
+
   return (
-    <div className="App">
-      <Header/>
-      <RouterProvider router = {appRouter}>
-          <Body/>
+    // <div className="App">
+      <MyContext.Provider value={{ widgetPosition, setWidgetPosition }}>
+        <Header />
+        <RouterProvider router={appRouter}>
+          <Body />
         </RouterProvider>
-    </div>
+      </MyContext.Provider>
+    // </div>
   );
 }
 
