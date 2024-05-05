@@ -6,8 +6,6 @@ import { landingPageCardData } from '../mockdata/landingPageCard';
 import { LineChart, Line, Tooltip } from 'recharts';
 import { graphData } from '../mockdata/graphData';
 
-
-
 export const Card = (props) => {
     let {id,city,forecastValue,forecastPercent} = props.data;
 

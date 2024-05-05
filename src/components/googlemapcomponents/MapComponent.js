@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './../Body.css';
 import { landingPageCardData } from '../../mockdata/landingPageCard';
+import { mapsApiKey } from '../../constants';
 
 const MapComponent = () => {
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   
-  // Initialize the map when component mounts
   useEffect(() => {
     const loadMap = () => {
       const google = window.google;
@@ -15,25 +15,20 @@ const MapComponent = () => {
         center: { lat: 19.076090, lng: 72.877426 },
         zoom: 4,
         scrollwheel: true,
-        // mapTypeId: 'satellite'
       });
       setMap(mapInstance);
     };
     
-    // Load the Google Maps API script dynamically
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAJdT5wT2CTZwpEnBB6fA_ePZav68WU3lg&libraries=places`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&libraries=places`;
     script.async = true;
     script.onload = loadMap;
     document.body.appendChild(script);
-
-    // Clean up function to remove the script
     return () => {
       document.body.removeChild(script);
     };
   }, []);
 
-  // Add markers to the map when the map is ready
   useEffect(() => {
     if (map) {
       const google = window.google;
@@ -44,10 +39,9 @@ const MapComponent = () => {
           position: { lat: marker.lat, lng: marker.lng },
           map: map,
           title: marker.city,
-          data: marker.data,
+          data: `Forecast Value: ${marker.forecastValue/1000} M`,
         });
 
-        // Add event listener for showing data on hover
         const infoWindow = new google.maps.InfoWindow({
           content: markerInstance.data,
         });
@@ -61,8 +55,6 @@ const MapComponent = () => {
 
         return markerInstance;
       });
-
-      // Set markers state
       setMarkers(markerList);
     }
   }, [map]);
@@ -74,11 +66,5 @@ const MapComponent = () => {
 
   return <div id="map" className="map-container"></div>;
 };
-
-const CustomMarker = (props) => {
-    return(
-      <div></div>
-    )
-}
 
 export default MapComponent;

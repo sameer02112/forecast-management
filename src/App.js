@@ -5,6 +5,7 @@ import DetailPage from './components/DetailPage';
 import { RouterProvider } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
 import { MainContainer, Body } from './components/Body';
+import { sidebarTabData } from './mockdata/customTabs';
 
 export const MyContext = createContext();
 
@@ -25,17 +26,15 @@ const appRouter = createBrowserRouter([{
 
 function App() {
 
-  const [widgetPosition, setWidgetPosition] = useState('');
+  const [widgetPosition, setWidgetPosition] = useState('center');
 
   return (
-    // <div className="App">
       <MyContext.Provider value={{ widgetPosition, setWidgetPosition }}>
         <Header />
         <RouterProvider router={appRouter}>
           <Body />
         </RouterProvider>
       </MyContext.Provider>
-    // </div>
   );
 }
 

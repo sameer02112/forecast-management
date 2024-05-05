@@ -9,9 +9,29 @@ import { MyContext } from '../App';
 
 export const LandingPage = () => {
     const { widgetPosition } = useContext(MyContext);    
+    const offsetVal = widgetPosition == 'top' ? '50%' : widgetPosition == 'center' ? '25%' : '0';
+    useEffect(()=>{
+        handleOffset();
+    })
+
+    const [style,setStyle] = useState({});
+
+    const handleOffset = () => {
+        let styleObj = {};
+        if(widgetPosition == 'top'){
+            styleObj['top'] = 0;
+        }
+        else if(widgetPosition == 'bottom'){
+            styleObj['bottom'] = 0;
+        }
+        else if(widgetPosition == 'center'){
+            styleObj['bottom'] = '25%';
+        }
+        setStyle(styleObj)
+    }
 
     return (
-        <div className="landing-page-container" style={{top: '-45rem'}}>
+        <div className="landing-page-container" style={style}>
             <h2 className="landing-page-header">Hello {userData.firstName + " " + userData.lastName}, </h2>
             <div className="landing-page-card-container">
                 {landingPageCardData.map(card => {

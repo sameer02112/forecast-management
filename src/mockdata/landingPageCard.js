@@ -7,7 +7,6 @@ export const landingPageCardData = [
         "lat": 19.076090,
         "lng": 72.877426,
         "data": 'Hello',
-        "trend": 'up',
     },
     {
         "id":2,
@@ -16,7 +15,7 @@ export const landingPageCardData = [
         "forecastPercent": "67",
         "lat": 13.0827,
         "lng": 80.2707,
-        "data": 'Hello' 
+        "data": 'Hello'
     },
     {
         "id":3,

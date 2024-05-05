@@ -1,13 +1,21 @@
-import React,{useState,useEffect} from 'react';
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
+import React,{useState,useEffect,useContext} from 'react';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label ,ReferenceLine, ReferenceArea} from 'recharts';
 import { graphData } from '../mockdata/graphData';
 import Divider from './Divider';
 import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import CustomLegend from './CustomLegend';
+import { StackContext } from './DetailPage';
+import { DataTable } from './DataTable';
 
-const DetailedGraph = ({id}) => {
+const DetailedGraph = ({id, specialRequirement}) => {
+  const [aiForecast,setAiForecast] = useState(true);
+  const [finalForecast, setFinalForecast] = useState(true);
+  const [confidenceInterval, setConfidenceInterval] = useState(true);
+
+  const { selectedStack } = useContext(StackContext);
+
     return (
         <div>
           <div className="graph-switchs-level1">
@@ -15,28 +23,35 @@ const DetailedGraph = ({id}) => {
             <span>Latest Issue</span>
             <Divider height="10px" color="#fff"/>
             <FormGroup>
-                <FormControlLabel control={<Switch />} label="Show confidence interval" />
+                <FormControlLabel control={<Switch defaultChecked/>} label="Show confidence interval" onChange={(e) => setConfidenceInterval(e.target.checked)}  />
             </FormGroup>
           </div>
           <div className="graph-switchs-level2">
             <CustomLegend color="green"/>
             <FormGroup>
-                  <FormControlLabel control={<Switch />} label= "AI Forecast" />
+                  <FormControlLabel control={<Switch defaultChecked/>} label= "AI Forecast" onChange={(e) => setAiForecast(e.target.checked)} />
             </FormGroup>
             <CustomLegend color="yellow"/>
             <FormGroup>
-                <FormControlLabel control={<Switch />} label="Final Forecast" />
+                <FormControlLabel control={<Switch defaultChecked/>} label="Final Forecast" onChange={(e) => setFinalForecast(e.target.checked)}/>
             </FormGroup>
             <CustomLegend color="blue"/>
-            <span>Consumption</span>
+            <span style={{paddingRight: '40px'}}>Consumption</span>
+            <CustomLegend color="green" type="dotted"/>
+            <span>AI Forecast</span>
+            <CustomLegend color="yellow" type="dotted"/>
+            <span>Final Forecast</span>
+            <CustomLegend color="orange" type="dotted"/>
+            <span>Previous Quarter Final Forecast</span>
           </div>
 
 
           <div className="chart-container">
-            <RechartComponent width={1200} height={400}  id={id}/>
+            <RechartComponent width={1200} height={400}  id={id} aiForecast={aiForecast} finalForecast={finalForecast} selectedStack={selectedStack} specialRequirement={specialRequirement} confidenceInterval={confidenceInterval}/>
           </div>
           <div className="data-table">
             {/* Data table component */}
+            <DataTable id={id}/>
           </div>
       </div>
     )
@@ -47,9 +62,9 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div className="custom-tooltip">
         <p>{`Quarter : ${label}`}</p>
-        <p>{`AI Forecast : ${payload[0].value}`}</p>
-        <p>{`Consumption : ${payload[1].value}`}</p>
-        <p>{`Final Forecast : ${payload[2].value}`}</p>
+        <p>{`AI Forecast : ${payload[0]?.value}`}</p>
+        <p>{`Consumption : ${payload[1]?.value}`}</p>
+        <p>{`Final Forecast : ${payload[2]?.value}`}</p>
       </div>
     );
   }
@@ -57,19 +72,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-
-const CustomizedDot = (props) => {
-    const { cx, cy } = props;
-  
-    return (
-      <g>
-        <line x1={cx} y1={cy} x2={cx} y2={cy} stroke="black" strokeDasharray="3 3" />
-        <circle cx={cx} cy={cy} r={4} fill="white" stroke="black" strokeWidth={2} />
-      </g>
-    );
-  };
-
-const RechartComponent = ({id}) => {
+const RechartComponent = ({id,aiForecast,finalForecast,selectedStack, specialRequirement, confidenceInterval}) => {
 
     const[data,setData] = useState([]);
 
@@ -88,26 +91,39 @@ const RechartComponent = ({id}) => {
       <ResponsiveContainer width={'95%'} height={400}>
         <LineChart data={data}>
             <CartesianGrid strokeDasharray="1 1" vertical={true} horizontal={false}/>
+            
             <XAxis dataKey="quarter" />
-            <YAxis>
+            <YAxis type="number">
               <Label value="Consumption (FT,Thousands)" angle={-90} position="insideLeft" style={{ textAnchor: 'middle' }} />
             </YAxis>
             <Tooltip content={<CustomTooltip />} />
-            {/* <Legend /> */}
-            <Line type="monotone" dataKey="histAiForecast" stroke="green"/>
+            {aiForecast && <Line type="monotone" dataKey="histAiForecast" stroke="green"/>}
             <Line type="monotone" dataKey="consumption" stroke="yellow" />
-            <Line type="monotone" dataKey="histFinalForecast" stroke="blue" />
-            <Line type="monotone" dataKey="aiForecast" stroke="yellow"  strokeDasharray="5 5"/>
-            <Line type="monotone" dataKey="finalForecast" stroke="yellow"  strokeDasharray="5 5"/>
+            {finalForecast && <Line type="monotone" dataKey="histFinalForecast" stroke="blue" />}
+            {aiForecast && <Line type="monotone" dataKey="aiForecast" stroke="yellow"  strokeDasharray="5 5"/>}
+            {finalForecast && <Line type="monotone" dataKey="finalForecast" stroke="yellow"  strokeDasharray="5 5"/>}
             <Line type="monotone" dataKey="prevQtrForecast" stroke="orange"  strokeDasharray="5 5"/>
+
+            {specialRequirement && 
+              <ReferenceLine
+                isFront
+                y={selectedStack.specialRequirement}
+                stroke="orange"
+                strokeDasharray="3 3"/>}
+
+            {confidenceInterval && 
+              <ReferenceLine
+                isFront
+                x={selectedStack.confidenceInterval}
+                stroke="#c9c9c9"
+                strokeWidth={3}
+                strokeDasharray="5 5"/>}
+
           </LineChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> 
       
     );
   };
   
-
-
-
 
 export default DetailedGraph

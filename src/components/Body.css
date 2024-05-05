@@ -6,18 +6,17 @@
 }
 
 .landing-page-container{
-    position: relative;
-    /* top: -45rem; */
+    position: absolute;
     color: white !important;
     display: flex;
     flex-direction: column;
     align-items: start;
     padding: 20px;
-    
 }
 .landing-page-header{
     font-size: 38px;
     top: 100px;
+    padding-top: 20px;
 }
 
 .map-container{
@@ -25,14 +24,23 @@
     transition: all 2s ease;
 }
 
+:root {
+    --screen-width: 100vw;
+}
+  
+/* @media screen and (max-width: 1200px) {
+:root {
+    --screen-width: 1200px;
+}
+} */
+
 .card-container{
     height: 15rem;
     border: 2px solid #c9c9c9;
     border-radius: 10px;
-    /* border-image: linear-gradient(to bottom right, #292586, #1ab89c) 1; */
     margin: 10px;
     margin-left: 0px !important;
-    min-width: 15rem;
+    width: calc(var(--screen-width) / 7);
     display: flex;
     align-items: start;
     flex-direction: column;
@@ -48,11 +56,25 @@
       min-width: 12rem;
     }
   }
+
+@media screen and (max-width: 420px) {
+    .card-container {
+        min-width: 8rem;
+        font-size: 12px;
+    }
+    .card-forecast-value-container{
+        font-size: 16px;
+    }
+    .landing-page-header{
+        font-size: 12px;
+    }
+}
+
 .card-forecast-value-container, .card-forecast-percent-container{
     display: flex;
     width: 100%;
     justify-content: space-between;
-    font-size: 22px;
+    font-size: 20px;
 }
 .card-forecast-value-container > span{
     padding: 5px;

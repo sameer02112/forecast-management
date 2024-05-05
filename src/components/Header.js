@@ -46,6 +46,7 @@ const Header = () => {
                 <span>Forecast Management</span>
             </div>
             <div className="app-controls">
+                <span onClick={(e) => handlePopup(e)}>Configure Widget</span>
                 <SettingsIcon onClick={(e) => handlePopup(e)}/>
                 <LanguageIcon/>
                 <PersonIcon/>

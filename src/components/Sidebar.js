@@ -13,6 +13,7 @@ import { sidebarTabData } from '../mockdata/customTabs';
 import Checkbox from '@mui/material/Checkbox';
 import EmailIcon from '@mui/icons-material/Email';
 import { MyContext } from '../App';
+import { StackContext } from './DetailPage';
 
 
 function CustomTabPanel(props) {
@@ -54,21 +55,34 @@ export const Sidebar = () => {
     const [sidebarData, setSidebarData] = useState([]);
 
     const { sideNavOpen } = useContext(MyContext);
+    const { selectedStack, setSelectedStack } = useContext(StackContext);
 
     const handleChange = (event, newValue) => {
     setValue(newValue);
     }
 
     useEffect(() => {
-      handleSidebarData()
+      handleSidebarData();
     }, [value])
-
 
     const handleSidebarData = () => {
       let data = value == 0 ? sidebarTabData['Backlog'] : value == 1 ? sidebarTabData['Pending'] : sidebarTabData['Final Sign-Off'];
+      setSelectedStack(data[0]);
       setSidebarData(data)
     }
 
+    const handleSidebarCheckboxChange = (data) => {
+      let tempData = Object.assign([],sidebarData);
+      tempData.forEach(ele=>{
+       if(ele.stackId == data.stackId){
+         ele['checked'] = true;
+       }else{
+         ele['checked'] = false;
+       }
+     })
+      setSidebarData(tempData);
+      setSelectedStack(data);
+    }
     
 
     return (
@@ -76,7 +90,7 @@ export const Sidebar = () => {
 
             <Link className="custom-link " to="/" ><ArrowBackIcon style={{color: '#fff', fontSize: '34px'}}/></Link>
 
-            <span style={{marginTop: '20px'}}>Sample Stack</span>
+            <span style={{marginTop: '20px'}}>Available Stack</span>
 
             <Box sx={{ width: 'fit-content' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -101,7 +115,7 @@ export const Sidebar = () => {
                         },
                       }}
                         checked={ele.checked}
-                        // onChange={handleChange}
+                        onChange={() => handleSidebarCheckboxChange(ele)}
                         inputProps={{ 'aria-label': 'controlled' }}
                       />
                       <div className="sidenavText">
@@ -109,7 +123,7 @@ export const Sidebar = () => {
                           <span>{ele.value1}</span>
                           <span style={{marginLeft: '5px'}}>{ele.value2}</span>
                         </div>
-                        <p>Sample Stack</p>
+                        <p>Stack : {ele.stackId}</p>
                       </div>
                       <EmailIcon fontSize="small"/>
                       
