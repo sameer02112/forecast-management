@@ -27,12 +27,6 @@
 :root {
     --screen-width: 100vw;
 }
-  
-/* @media screen and (max-width: 1200px) {
-:root {
-    --screen-width: 1200px;
-}
-} */
 
 .card-container{
     height: 15rem;
@@ -53,28 +47,17 @@
     
 }
 .card-container:hover {
-    -ms-transform: scale(1.5); /* IE 9 */
-    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
     transform: scale(1.07); 
   }
 @media screen and (max-width: 980px) {
     .card-container {
-      min-width: 12rem;
+      min-width: 130px;
     }
   }
 
-@media screen and (max-width: 420px) {
-    .card-container {
-        min-width: 8rem;
-        font-size: 12px;
-    }
-    .card-forecast-value-container{
-        font-size: 16px;
-    }
-    .landing-page-header{
-        font-size: 12px;
-    }
-}
+
 
 .card-forecast-value-container, .card-forecast-percent-container{
     display: flex;
