@@ -7,6 +7,7 @@ export const landingPageCardData = [
         "lat": 19.076090,
         "lng": 72.877426,
         "data": 'Hello',
+        "trend": "up"
     },
     {
         "id":2,
@@ -15,7 +16,8 @@ export const landingPageCardData = [
         "forecastPercent": "67",
         "lat": 13.0827,
         "lng": 80.2707,
-        "data": 'Hello'
+        "data": 'Hello',
+        "trend": "up"
     },
     {
         "id":3,
@@ -24,7 +26,8 @@ export const landingPageCardData = [
         "forecastPercent": "99",
         "lat": 22.5726,
         "lng": 88.3639,
-        "data": 'Hello' 
+        "data": 'Hello',
+        "trend": "down"
     },
     {
         "id":4,
@@ -33,7 +36,8 @@ export const landingPageCardData = [
         "forecastPercent": "91",
         "lat": 28.6139,
         "lng": 77.2090,
-        "data": 'Hello' 
+        "data": 'Hello',
+        "trend": "up"
     },
     {
         "id":5,
@@ -42,7 +46,8 @@ export const landingPageCardData = [
         "forecastPercent": "75",
         "lat": 17.385044,
         "lng": 78.486671,
-        "data": 'Hello' 
+        "data": 'Hello',
+        "trend": "down"
     },
     {
         "id":6,
@@ -51,7 +56,8 @@ export const landingPageCardData = [
         "forecastPercent": "85",
         "lat": 18.5204,
         "lng": 73.8567,
-        "data": 'Hello' 
+        "data": 'Hello',
+        "trend": "down"
     },
     {
         "id":7,
@@ -60,6 +66,7 @@ export const landingPageCardData = [
         "forecastPercent": "84",
         "lat": 12.9716,
         "lng": 77.5946,
-        "data": 'Hello' 
+        "data": 'Hello',
+        "trend": "up" 
     },
 ]

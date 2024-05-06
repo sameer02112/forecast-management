@@ -107,6 +107,8 @@
 /* chart */
 .chart-container{
     margin-top: 10px;
+    padding-left: 80px;
+    padding-right: 20px;
 }
 .graph-switchs-level1{
     color: white;
@@ -137,6 +139,17 @@
     box-shadow:  0 0 10px#000000;
 }
 /* table */
-.MuiTable-root{
-    padding-left: 0 !important;
+.css-dv0mq-MuiTableCell-root {
+    padding: 0 !important;
+}
+.data-table{
+    margin-left: 10px;
+    margin-bottom: 10px;
+    overflow-x: scroll;
+}
+.css-dsuxgy-MuiTableCell-root {
+    text-overflow: ellipsis;
+    /* overflow: hidden; */
+    white-space: nowrap;
+    padding: 2px;
 }

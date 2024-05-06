@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import CustomLegend from './CustomLegend';
 import { StackContext } from './DetailPage';
 import { DataTable } from './DataTable';
+import { MyContext } from '../App';
 
 const DetailedGraph = ({id, specialRequirement}) => {
   const [aiForecast,setAiForecast] = useState(true);
@@ -15,7 +16,6 @@ const DetailedGraph = ({id, specialRequirement}) => {
   const [confidenceInterval, setConfidenceInterval] = useState(true);
 
   const { selectedStack } = useContext(StackContext);
-
     return (
         <div>
           <div className="graph-switchs-level1">
@@ -50,7 +50,6 @@ const DetailedGraph = ({id, specialRequirement}) => {
             <RechartComponent width={1200} height={400}  id={id} aiForecast={aiForecast} finalForecast={finalForecast} selectedStack={selectedStack} specialRequirement={specialRequirement} confidenceInterval={confidenceInterval}/>
           </div>
           <div className="data-table">
-            {/* Data table component */}
             <DataTable id={id}/>
           </div>
       </div>
@@ -72,9 +71,12 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
+
 const RechartComponent = ({id,aiForecast,finalForecast,selectedStack, specialRequirement, confidenceInterval}) => {
 
     const[data,setData] = useState([]);
+    const CQ = 'FY24Q2';
+    const { sideNavOpen, setSideNavOpen } = useContext(MyContext);
 
     useEffect(()=>{
         handleGraphData();
@@ -88,12 +90,12 @@ const RechartComponent = ({id,aiForecast,finalForecast,selectedStack, specialReq
     }
    
     return (
-      <ResponsiveContainer width={'95%'} height={400}>
+      <ResponsiveContainer width={sideNavOpen ?'80%' : '100%'} height={400}>
         <LineChart data={data}>
             <CartesianGrid strokeDasharray="1 1" vertical={true} horizontal={false}/>
             
-            <XAxis dataKey="quarter" />
-            <YAxis type="number">
+            <XAxis dataKey="quarter"/>
+            <YAxis type="number" >
               <Label value="Consumption (FT,Thousands)" angle={-90} position="insideLeft" style={{ textAnchor: 'middle' }} />
             </YAxis>
             <Tooltip content={<CustomTooltip />} />
@@ -118,6 +120,14 @@ const RechartComponent = ({id,aiForecast,finalForecast,selectedStack, specialReq
                 stroke="#c9c9c9"
                 strokeWidth={3}
                 strokeDasharray="5 5"/>}
+
+              <ReferenceLine
+                isFront
+                x={CQ}
+                label='Curr Qtr'
+                stroke="gray"
+                strokeWidth={5}
+                strokeDasharray="10 5"/>
 
           </LineChart>
       </ResponsiveContainer> 

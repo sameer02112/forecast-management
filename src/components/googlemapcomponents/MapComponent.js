@@ -61,7 +61,7 @@ const MapComponent = () => {
 
   window.onload = function() {
     var div = document.getElementById('map');
-    div.style.transform = 'scale(1.4)';
+    div.style.transform = 'scale(1.6)';
   };
 
   return <div id="map" className="map-container"></div>;

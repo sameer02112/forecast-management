@@ -12,7 +12,7 @@ export const LandingPage = () => {
     const offsetVal = widgetPosition == 'top' ? '50%' : widgetPosition == 'center' ? '25%' : '0';
     useEffect(()=>{
         handleOffset();
-    })
+    },[widgetPosition])
 
     const [style,setStyle] = useState({});
 
@@ -27,6 +27,11 @@ export const LandingPage = () => {
         else if(widgetPosition == 'center'){
             styleObj['bottom'] = '25%';
         }
+        else if(widgetPosition == 'right'){
+            styleObj['flex-direction'] = 'row';
+            styleObj['bottom'] = '25%';
+            styleObj['align-items'] = 'center';
+        }
         setStyle(styleObj)
     }
 
@@ -38,6 +43,7 @@ export const LandingPage = () => {
                     return <Link className="custom-link" to={'/detail?id=' + card.id} key={card.id}><Card data = {card}/></Link>
                 })}
             </div>
+            
         </div>
     )
 }

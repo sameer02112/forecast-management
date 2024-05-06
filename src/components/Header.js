@@ -71,7 +71,7 @@ const Header = () => {
                     >
                         {widgetPositon.map((ele,index) => {
                         return(
-                            <FormControlLabel value={ele.location} control={<Radio checked={ele.checked} />} label={ele.displayName} onChange={() => handleRadioChange(ele)}/>
+                            <FormControlLabel key={index} value={ele.location} control={<Radio checked={ele.checked} />} label={ele.displayName} onChange={() => handleRadioChange(ele)}/>
                         )
                     })}
                     </RadioGroup>

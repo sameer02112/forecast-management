@@ -56,7 +56,6 @@ export const DetailedScreen = ({id}) => {
                     </div>
                 </div>
                 <FlagOutlinedIcon/>
-                {console.log(landingPageCardData, id)}
                 <h4>City : {landingPageCardData.filter(el => el.id == id)[0]?.city}</h4>
             </div>
             <div className="detailed-subheader">

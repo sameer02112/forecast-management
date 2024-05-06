@@ -9,16 +9,11 @@ export const widgetPositon = [
         'displayName': 'Top',
         'checked': false
     },
-    // {
-    //     'location': 'left',
-    //     'displayName': 'Left',
-    //     'checked': false
-    // },
-    // {
-    //     'location': 'right',
-    //     'displayName': 'Right',
-    //     'checked': false
-    // },
+    {
+        'location': 'right',
+        'displayName': 'Right',
+        'checked': false
+    },
     {
         'location': 'bottom',
         'displayName': 'Bottom',

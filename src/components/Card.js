@@ -7,7 +7,7 @@ import { LineChart, Line, Tooltip } from 'recharts';
 import { graphData } from '../mockdata/graphData';
 
 export const Card = (props) => {
-    let {id,city,forecastValue,forecastPercent} = props.data;
+    let {id,city,forecastValue,forecastPercent, trend} = props.data;
 
     const [gData,setGData] = useState([]);
 
@@ -32,7 +32,7 @@ export const Card = (props) => {
                   <Tooltip/>
                   <Line type="monotone" dataKey="consumption" stroke="#8884d8"/>
                 </LineChart>
-                <span><TrendingUpIcon style={{color: 'green'}}/></span>
+                <span>{trend == 'up' ? <TrendingUpIcon style={{color: 'green'}}/> : <TrendingDownIcon style={{color: 'red'}}/>}</span>
             </div>
             <span>Forecast</span>
             <div className="card-forecast-percent-container">
