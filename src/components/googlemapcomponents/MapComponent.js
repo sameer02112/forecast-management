@@ -12,7 +12,7 @@ const MapComponent = () => {
       const google = window.google;
       const mapElement = document.getElementById('map');
       const mapInstance = new google.maps.Map(mapElement, {
-        center: { lat: 19.076090, lng: 72.877426 },
+        center: { lat: 40.076090, lng: 72.877426 },
         zoom: 4,
         scrollwheel: true,
       });
